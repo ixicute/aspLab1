@@ -1,0 +1,73 @@
+﻿@using SkolprojektLab1.ViewModels;
+@model CreateLeaveViewModel
+
+
+<div class="row">
+    <div class="logo-container">
+        <span class="logo-text">MA</span>
+    </div>
+    <h4 class="text-center text-info"><b>Create A Leave Application</b></h4>
+    
+    <div class="col-md-8 offset-2">
+        <form asp-action="CreateLeave">
+            <div class="form-group">
+                @if(TempData["Error"] != null)
+                {
+                    <span class="text-danger">@TempData["LeaveError"]</span>
+                }
+                <label asp-for="LeaveTypeId" class="control-label">
+                    <b>Which leave are you applying for?</b>
+                    </label><span class="text-danger"> *</span>
+                <select asp-for="LeaveTypeId" class="form-control form-select">
+                    <option value="" disabled selected>Pick leave type:</option>
+                    @foreach (var item in Model.leaveList)
+                    {
+                        <option value="@item.Id">@item.LeaveType</option>
+                    }
+                </select>
+                @if (TempData["LeaveError"] != null)
+                {
+                    <span class="text-danger">@TempData["LeaveError"]</span>
+                }
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="LeaveDescription" class="control-label">
+                    <b>Descripe the reason: </b><span class="text-success">(Optional)</span>
+                </label>
+                <input asp-for="LeaveDescription" class="form-control" />
+
+                <label asp-for="Start" class="control-label">
+                    <b>Pick a start date:</b>
+                </label><span class="text-danger"> *</span>
+                <input asp-for="Start" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" />
+                @if (TempData["StartDateError"] != null)
+                {
+                    <span class="text-danger">@TempData["StartDateError"]</span>
+
+                    <br />
+                }
+
+                <label asp-for="End" class="control-label">
+                    <b>Pick an end date:</b>
+                </label><span class="text-danger"> *</span>
+                <input asp-for="End" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" />
+                @if (TempData["EndDateError"] != null)
+                {
+                    <span class="text-danger">@TempData["EndDateError"]</span>
+
+                    <br />
+                }
+
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-outline-success float-right mt-3" type="submit" value="Submit Leave" />
+                <a class="btn btn-outline-secondary mt-3" asp-controller="Home" asp-action="Index">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>

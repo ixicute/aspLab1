@@ -1,0 +1,56 @@
+﻿@using SkolprojektLab1.ViewModels;
+@model List<SearchEmpLeaveViewModel>
+
+<div>
+    <form asp-action="SearchEmpLeave" method="get" class="d-flex justify-content-end" style="max-width: 100%">
+        
+        <div class="form-group">
+            <label for="SearchString"><b>Search using <em>username</em> or <em>email-address:</em></b></label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="SearchString" value="" />
+                <div class="input-group-append">
+                    <input type="submit" value="Search" class="btn btn-primary">
+                </div>
+            </div>
+            <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" name="WithLeaveOnly" value="true" />
+                <label class="form-check-label" for="WithLeaveOnly">With Leaves Only</label>
+            </div>
+        </div>
+    </form>
+    @if (Model.Count < 1)
+    {
+        <p class="text-danger text-center"><b>Nothing found.</b></p>
+    }
+    <table class="table table-striped table-bordered table-hover mt-5">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Applied for leave?</th>
+            </tr>
+        </thead>
+        
+            @if(Model.Count >= 1)
+            {
+            
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td scope="row"><b>@item.UserId</b></td>
+                                <td>@item.Username</td>
+                                <td>@item.EmployeeName</td>
+                                <td>@item.EmployeeEmail</td>
+                                <td>@item.EmpAddress</td>
+                                <td>@(item.HasLeave == true ? "Yes" : (item.HasLeave == false ? "No" : "Unknown"))</td>
+                            </tr>
+                        }
+                    </tbody>
+            
+            }
+    </table>
+</div>

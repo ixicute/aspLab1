@@ -1,0 +1,103 @@
+﻿@using SkolprojektLab1.ViewModels
+@model List<LeaveByDate>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-6">
+            <form asp-action="SearchLeaveByDate" method="get" class="form-inline w-50">
+                <div class="form-group mr-2">
+                    <label for="fromDate" class="small"><b>From Date:</b></label>
+                    <input type="date" class="form-control" id="fromDate" name="fromDate">
+                </div>
+                <div class="form-group">
+                    <label for="toDate" class="small  mt-2"><b>To Date:</b></label>
+                    <input type="date" class="form-control" id="toDate" name="toDate">
+                </div>
+                <div class="form-group ml-auto mt-2 float-end">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<div class="d-flex justify-content-end">
+    <form asp-action="SearchLeaveByDate" method="get" class="form-inline">
+        <div class="form-group">
+            <label for="fromDate" class="small"><b>From Date:</b></label>
+            <input type="date" class="form-control" id="fromDate" name="fromDate" required>
+        </div>
+        <div class="form-group">
+            <label for="toDate" class="small mt-2"><b>To Date:</b></label>
+            <input type="date" class="form-control" id="toDate" name="toDate" required>
+        </div>
+        <div class="w-100"></div>
+        <div class="form-group mt-2">
+            <button type="submit" class="btn btn-primary ml-auto">Filter</button>
+        </div>
+    </form>
+</div>*@
+
+
+
+<table class="table table-striped table-bordered table-hover mt-5">
+    <thead class="table-primary">
+        <tr>
+            <th>#</th>
+            <th>Employee Name</th>
+            <th>Duration</th>
+            <th>Created On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <b>@item.EmployeeId</b>
+                </td>
+                <td>
+                    @item.EmployeeName
+                </td>
+                <td>
+                    @{
+                        if (item.Ends != null && item.Started != null)
+                        {
+                            var duration = (item.Ends.Value - item.Started.Value).TotalDays;
+                            if (duration >= 2)
+                            {
+                                @(duration.ToString() + " Days")
+                            } else
+                            {
+                                @(duration.ToString() + " Day")
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (item.CreatedOn != null)
+                        {
+                            var daysAgo = (DateTime.Now.Date - item.CreatedOn.Value.Date).TotalDays;
+
+                            if (daysAgo == 0)
+                            {
+                                @("Today")
+                            }
+                            else if (daysAgo == 1)
+                            {
+                                @("Yesterday")
+                            }
+                            else
+                            {
+                                @($"{daysAgo} days ago")
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
