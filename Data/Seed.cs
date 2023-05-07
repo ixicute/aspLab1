@@ -112,6 +112,33 @@ namespace SkolprojektLab1.Data
 
                     await userManager.CreateAsync(newUser, "userMaX33!");
                 }
+                
+                if (!context.EmpLeaves.Any())
+                {
+                    context.EmpLeaves.AddRange(new List<EmpLeave>()
+                    {
+                        new EmpLeave
+                        {
+                            FK_Employee = 1,
+                            FK_Leave = 4,
+                            LeaveDescription = "Worked too hard, need a break!",
+                            Start = DateTime.Parse("2023-05-05"),
+                            End = DateTime.Parse("2023-05-06"),
+                            CreatedOn = DateTime.Parse("2023-05-01")
+                        },
+
+                        new EmpLeave
+                        {
+                            FK_Employee = 2,
+                            FK_Leave = 2,
+                            LeaveDescription = "",
+                            Start = DateTime.Parse("2023-05-02"),
+                            End = DateTime.Parse("2023-05-05"),
+                            CreatedOn = DateTime.Parse("2023-05-01")
+                        }
+                    });
+                    context.SaveChanges();
+                }
             }
         }
     }
