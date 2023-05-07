@@ -20,4 +20,3 @@ The following functionalities should be supported in the Console application or 
 Here is an overview of how it looks like!
 
 This is a demo of the homepage when user is not logged-in:
-![Homepage](https://user-images.githubusercontent.com/25350208/236681421-b5d1d07e-5a6d-4f86-9dd0-07f1d0d2832a.mp4)
