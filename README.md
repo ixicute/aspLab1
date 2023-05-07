@@ -11,12 +11,6 @@ The following are the requirements for the data structure in your program.
 
 ### Functional Requirements
 
-The following functionalities should be supported in the Console application or an MVC App.
-
 - [x] An employee should be able to create a leave application by providing the start and end dates and selecting the type of leave. The system should automatically record the time of application submission without user input.
 - [x] Implement the functionality to retrieve information about a specific person, including their name and whether they have applied for leave.
 - [x] The administrator should be able to retrieve all applications created in a specific month. The system should display the number of leave days requested by each person and the dates on which the applications were created.
-
-Here is an overview of how it looks like!
-
-This is a demo of the homepage when user is not logged-in:
